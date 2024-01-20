@@ -1,0 +1,42 @@
+.container {
+  display: grid;
+  width: 98vw;
+  height: 93vh;
+  grid-template-rows: 1fr 10fr;
+  grid-template-columns:
+    [icon] 1f
+    [search] 4fr
+    [space] 2fr
+    [actions] 3fr;
+  grid-template-areas:
+    "icon    search    space      actions"
+    "catalog  catalog   catalog  catalog";
+}
+
+.icon {
+  background-color: lightblue;
+  grid-area: icon;
+}
+
+.search {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  grid-area: search;
+}
+
+.space {
+  background-color: lightblue;
+  grid-area: space;
+}
+
+.actions {
+  background-color: lightblue;
+  grid-area: actions;
+}
+
+.catalog {
+  background-color: lightgray;
+  grid-area: catalog;
+}
