@@ -5,18 +5,26 @@ import { StoreApiService } from '../store-api.service';
 import { BehaviorSubject, Observable, catchError, map, switchMap } from 'rxjs';
 import { SearchService } from './search.service';
 import { FormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [CommonModule, RouterOutlet, FormsModule, AutoCompleteModule],
   template: `
-    <input list="suggestions" [(ngModel)]="userInput" (input)="enterInput()" />
-    <datalist *ngIf="userInput.length > 0" id="suggestions">
-      <option *ngFor="let option of (suggestions | async)!">
-        {{ option }}
-      </option>
-    </datalist>
+    <p-autoComplete
+      [(ngModel)]="userInput"
+      [suggestions]="(suggestions | async) ?? []"
+      (completeMethod)="searchAutoCompleteSuggestions()"
+      (onSelect)="searchInput()"
+    />
+    <button
+      class="icon-only-button"
+      (click)="searchInput()"
+      style="margin-left: 0.5rem"
+    >
+      <i class="pi pi-search"></i>
+    </button>
   `,
 })
 export class SearchBarComponent {
@@ -25,7 +33,11 @@ export class SearchBarComponent {
   suggestions = this.searchService.suggestionsForPrefix$;
   constructor(public searchService: SearchService) {}
 
-  enterInput() {
-    this.searchService.enterInput(this.userInput);
+  searchAutoCompleteSuggestions() {
+    this.searchService.searchAutoCompleteSuggestions(this.userInput);
+  }
+
+  searchInput() {
+    this.searchService.search(this.userInput);
   }
 }
