@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
         <ng-template pTemplate="list" let-products>
           <div *ngFor="let item of products; let first = first">
             <img [src]="item.imagePath" [alt]="item.name" />
+            {{ item.name }}
           </div>
         </ng-template>
       </p-dataView>
