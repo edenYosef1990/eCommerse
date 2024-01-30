@@ -5,6 +5,7 @@ import { SearchBarComponent } from './search/search-bar.component';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ImageModule } from 'primeng/image';
+import { UserManagementComponent } from './user-management.component';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +38,12 @@ export class HomeComponent {
   }
 
   onClickUser() {
+    this.dialogService.open(UserManagementComponent, {
+      width: '50%',
+      height: '50%',
+      header: 'user management',
+      modal: true,
+    });
     //
   }
 }
