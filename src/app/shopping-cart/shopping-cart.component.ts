@@ -1,19 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { StoreApiService } from '../store-api.service';
-import { DataViewModule } from 'primeng/dataview';
-import { TagModule } from 'primeng/tag';
-import { RatingModule } from 'primeng/rating';
-import { FormsModule } from '@angular/forms';
+import { ShoppingCartService } from './shopping-car.service';
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
 import { BreakTextToLinesPipe } from '../pipes/break-text-to-lines.pipe';
+import { RatingModule } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { ShoppingCartService } from '../shopping-cart/shopping-car.service';
 
 @Component({
-  selector: 'all-products-list-item-summary-component',
+  selector: 'shopping-cart-item-summary-component',
   imports: [
     CardModule,
     ImageModule,
@@ -54,20 +50,18 @@ import { ShoppingCartService } from '../shopping-cart/shopping-car.service';
           class="image"
           [src]="item.imagePath"
           [alt]="item.name"
-          width="250"
+          width="50"
           [preview]="true"
         />
         <div class="description">
-          {{ item.name | limitBeforeBreak : 80 }}
-          <p-rating [(ngModel)]="value" />
-          <p-button label="Purchase" (click)="onClickPurchase()" />
+          {{ item.name }}
         </div>
       </div>
     </p-card>
   `,
   standalone: true,
 })
-export class ProductsListItemSummaryComponent {
+export class ShoppingCardItemSummaryComponent {
   @Input() item!: { name: string; imagePath: string; id: string };
 
   constructor(private service: ShoppingCartService) {}
@@ -80,30 +74,17 @@ export class ProductsListItemSummaryComponent {
 }
 
 @Component({
-  selector: 'app-products-list',
+  imports: [CommonModule, AsyncPipe, ShoppingCardItemSummaryComponent],
   standalone: true,
-  imports: [
-    ProductsListItemSummaryComponent,
-    CommonModule,
-    RouterOutlet,
-    DataViewModule,
-    TagModule,
-    RatingModule,
-    FormsModule,
-    NgFor,
-  ],
   template: `
-    <p-dataView #dv [value]="products">
-      <ng-template pTemplate="list" let-products>
-        <div *ngFor="let item of products; let first = first">
-          <all-products-list-item-summary-component [item]="item" />
-        </div>
-      </ng-template>
-    </p-dataView>
+    list of items:
+    <div *ngFor="let item of products$ | async">
+      <shopping-cart-item-summary-component [item]="item" />
+    </div>
   `,
-  styleUrls: ['./display-search-results.component.scss'],
 })
-export class ProductsListComponent {
-  @Input() products!: { name: string; imagePath: string }[];
-  constructor(private storeApi: StoreApiService) {}
+export class ShoppingCartComponent {
+  products$ = this.service.pullProductsListInCart();
+
+  constructor(private service: ShoppingCartService) {}
 }

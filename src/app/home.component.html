@@ -3,8 +3,20 @@
   <div class="search"><app-search-bar /></div>
   <div class="space"></div>
   <div class="actions">
-    <button>Cart</button>
-    <button>User</button>
+    <button
+      class="icon-only-button"
+      (click)="onClickCart()"
+      style="margin: 0.5rem"
+    >
+      <i class="pi pi-shopping-cart" style="font-size: 2.5rem"></i>
+    </button>
+    <button
+      class="icon-only-button"
+      (click)="onClickUser()"
+      style="margin: 0.5rem"
+    >
+      <i class="pi pi-user" style="font-size: 2.5rem"></i>
+    </button>
   </div>
   <div class="catalog">
     <router-outlet name="products"></router-outlet>

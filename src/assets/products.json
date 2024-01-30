@@ -2,27 +2,33 @@
   "products": [
     {
       "name": "Amazon Fire TV Stick with Alexa Voice Remote (includes TV controls), free & live TV without cable or satellite, HD streaming device",
-      "imagePath": "remote1.jpg"
+      "imagePath": "remote1.jpg",
+      "id": "001"
     },
     {
       "name": "all-new amazon fire tv stick 4k max streaming device, supports wi-fi 6e, free & live tv without cable or satellite",
-      "imagePath": "remote2.jpg"
+      "imagePath": "remote2.jpg",
+      "id": "002"
     },
     {
       "name": "Apple AirPods Pro (2nd Generation) Wireless Ear Buds with USB-C Charging, Up to 2X More Active Noise Cancelling Bluetooth Headphones, Transparency Mode, Adaptive Audio, Personalized Spatial Audio",
-      "imagePath": "51Avf7lB49L._AC_UL450_SR450_320_.jpg"
+      "imagePath": "51Avf7lB49L._AC_UL450_SR450_320_.jpg",
+      "id": "003"
     },
     {
       "name": "STANLEY IceFlow Stainless Steel Tumbler with Straw, Vacuum Insulated Water Bottle for Home, Office or Car, Reusable Cup with Straw Leakproof Flip",
-      "imagePath": "51fd-ARdg7L._AC_UL450_SR450_320_.jpg"
+      "imagePath": "51fd-ARdg7L._AC_UL450_SR450_320_.jpg",
+      "id": "004"
     },
     {
       "name": "Squishmallows Original 10-Inch Harry Potter Plush - Medium-Sized Ultrasoft Official Jazwares Plush",
-      "imagePath": "71camC2PyBL._AC_UL450_SR450_320_.jpg"
+      "imagePath": "71camC2PyBL._AC_UL450_SR450_320_.jpg",
+      "id": "007"
     },
     {
       "name": "LEGO Roses Building Kit, Unique Gift for Valentine's Day, Botanical Collection, Gift to Build Together, 40460",
-      "imagePath": "71S1UEWVIBL._AC_UL450_SR450_320_.jpg"
+      "imagePath": "71S1UEWVIBL._AC_UL450_SR450_320_.jpg",
+      "id": "014"
     }
   ]
 }

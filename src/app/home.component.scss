@@ -34,6 +34,9 @@
 .actions {
   background-color: lightblue;
   grid-area: actions;
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
 }
 
 .catalog {
