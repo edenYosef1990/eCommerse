@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { SearchBarComponent } from './search/search-bar.component';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ImageModule } from 'primeng/image';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     RouterOutlet,
     SearchBarComponent,
     DynamicDialogModule,
+    ImageModule,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
@@ -20,6 +22,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 })
 export class HomeComponent {
   title = 'eCommerse';
+  path = `assets/products/logo.jpg`;
 
   constructor(private dialogService: DialogService) {}
 
