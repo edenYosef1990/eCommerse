@@ -9,8 +9,8 @@ import {
   throwError,
   withLatestFrom,
 } from 'rxjs';
-import { ShoppingCartItem } from '../models/shopping-cart-item';
-import { StoreApiService } from '../store-api.service';
+import { ShoppingCartItem } from './models/shopping-cart-item';
+import { StoreApiService } from './store-api.service';
 
 @Injectable({
   providedIn: 'root',

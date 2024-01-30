@@ -10,7 +10,7 @@ import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
 import { BreakTextToLinesPipe } from '../pipes/break-text-to-lines.pipe';
 import { ButtonModule } from 'primeng/button';
-import { ShoppingCartService } from '../shopping-cart/shopping-car.service';
+import { ShoppingCartService } from '../store-state.service';
 
 @Component({
   selector: 'all-products-list-item-summary-component',

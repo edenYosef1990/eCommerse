@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ShoppingCartService } from './shopping-car.service';
+import { ShoppingCartService } from '../store-state.service';
 import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
@@ -7,6 +7,8 @@ import { BreakTextToLinesPipe } from '../pipes/break-text-to-lines.pipe';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { map, tap } from 'rxjs';
+import { ShoppingCartFacadeService } from './shopping-cart-facade.service';
 
 @Component({
   selector: 'shopping-cart-item-summary-component',
@@ -28,12 +30,16 @@ import { ButtonModule } from 'primeng/button';
 
       .container {
         display: grid;
-        grid-template-columns: 1fr 4fr;
-        grid-template-areas: 'image description';
+        grid-template-columns: 1fr 6fr 1fr;
+        grid-template-areas: 'image description cancel';
       }
 
       .image {
         grid-area: image;
+      }
+
+      .cancel {
+        grid-area: cancel;
       }
 
       .description {
@@ -56,6 +62,14 @@ import { ButtonModule } from 'primeng/button';
         <div class="description">
           {{ item.name }}
         </div>
+
+        <button
+          class="icon-only-button"
+          (click)="onClickCancel()"
+          style="margin: 0.5rem"
+        >
+          <i class="pi pi-times-circle" style="font-size: 2.5rem"></i>
+        </button>
       </div>
     </p-card>
   `,
@@ -63,28 +77,26 @@ import { ButtonModule } from 'primeng/button';
 })
 export class ShoppingCardItemSummaryComponent {
   @Input() item!: { name: string; imagePath: string; id: string };
-
-  constructor(private service: ShoppingCartService) {}
-
-  onClickPurchase() {
-    this.service.addToShoppingCart(this.item.id);
-  }
-
   value = 3.5;
+
+  constructor(public service: ShoppingCartFacadeService) {}
+
+  onClickCancel() {
+    this.service.removeFromShoppingCart(this.item.id);
+  }
 }
 
 @Component({
   imports: [CommonModule, AsyncPipe, ShoppingCardItemSummaryComponent],
+  providers: [ShoppingCartFacadeService],
   standalone: true,
   template: `
     list of items:
-    <div *ngFor="let item of products$ | async">
+    <div *ngFor="let item of service.products$ | async">
       <shopping-cart-item-summary-component [item]="item" />
     </div>
   `,
 })
 export class ShoppingCartComponent {
-  products$ = this.service.pullProductsListInCart();
-
-  constructor(private service: ShoppingCartService) {}
+  constructor(public service: ShoppingCartFacadeService) {}
 }
