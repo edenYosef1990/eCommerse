@@ -12,9 +12,10 @@ interface PurchaseResult {
 })
 export class StoreApiService {
   getSuggestions(prefix: string): Observable<string[]> {
-    return of(
-      data.products.map((x) => x.name).filter((x) => x.startsWith(prefix))
-    );
+    return of([
+      prefix,
+      ...data.products.map((x) => x.name).filter((x) => x.startsWith(prefix)),
+    ]);
   }
 
   getProducts(
