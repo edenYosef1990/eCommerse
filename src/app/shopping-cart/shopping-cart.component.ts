@@ -7,7 +7,6 @@ import { BreakTextToLinesPipe } from '../pipes/break-text-to-lines.pipe';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { map, tap } from 'rxjs';
 import { ShoppingCartFacadeService } from './shopping-cart-facade.service';
 
 @Component({

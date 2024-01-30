@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ShoppingCartService } from '../store-state.service';
 import { BehaviorSubject, Observable, map, take, tap } from 'rxjs';
+import { DialogService } from 'primeng/dynamicdialog';
+import { PurchaseConfirmedComponent } from './purchase-confirmed.component';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,10 @@ export class ShoppingCartFacadeService {
   products$: Observable<{ name: string; imagePath: string; id: string }[]> =
     this._products$;
 
-  constructor(private service: ShoppingCartService) {
+  constructor(
+    private service: ShoppingCartService,
+    private dialogService: DialogService
+  ) {
     this.reloadUpdatedProductsList();
   }
 
@@ -45,7 +50,10 @@ export class ShoppingCartFacadeService {
   }
 
   buyAllItemsInCart() {
-    this.service.buyAllItemsInCart().subscribe((_) => {
+    this.service.buyAllItemsInCart().subscribe((result) => {
+      this.dialogService.open(PurchaseConfirmedComponent, {
+        data: result.shippingId,
+      });
       this.reloadUpdatedProductsList();
     });
   }
