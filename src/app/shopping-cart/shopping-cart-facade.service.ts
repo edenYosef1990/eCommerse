@@ -45,6 +45,8 @@ export class ShoppingCartFacadeService {
   }
 
   buyAllItemsInCart() {
-    this.service.buyAllItemsInCart();
+    this.service.buyAllItemsInCart().subscribe((_) => {
+      this.reloadUpdatedProductsList();
+    });
   }
 }

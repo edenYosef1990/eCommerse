@@ -48,7 +48,8 @@ export class ShoppingCartService {
       catchError((err) => {
         console.log(err);
         return throwError(() => new Error(err));
-      })
+      }),
+      take(1)
     );
   }
 

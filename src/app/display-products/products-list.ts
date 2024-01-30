@@ -60,7 +60,7 @@ import { ShoppingCartService } from '../store-state.service';
         <div class="description">
           {{ item.name | limitBeforeBreak : 80 }}
           <p-rating [(ngModel)]="value" />
-          <p-button label="Purchase" (click)="onClickPurchase()" />
+          <p-button label="Add To Cart" (click)="onClickAddToCart()" />
         </div>
       </div>
     </p-card>
@@ -72,7 +72,7 @@ export class ProductsListItemSummaryComponent {
 
   constructor(private service: ShoppingCartService) {}
 
-  onClickPurchase() {
+  onClickAddToCart() {
     this.service.addToShoppingCart(this.item.id);
   }
 

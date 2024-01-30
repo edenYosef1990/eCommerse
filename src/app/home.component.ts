@@ -25,6 +25,8 @@ export class HomeComponent {
 
   onClickCart() {
     this.dialogService.open(ShoppingCartComponent, {
+      width: '50%',
+      height: '50%',
       header: 'shoppingCart',
       modal: true,
     });

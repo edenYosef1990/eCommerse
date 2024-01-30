@@ -87,16 +87,31 @@ export class ShoppingCardItemSummaryComponent {
 }
 
 @Component({
-  imports: [CommonModule, AsyncPipe, ShoppingCardItemSummaryComponent],
+  imports: [
+    CommonModule,
+    AsyncPipe,
+    ShoppingCardItemSummaryComponent,
+    ButtonModule,
+  ],
   providers: [ShoppingCartFacadeService],
   standalone: true,
   template: `
-    list of items:
-    <div *ngFor="let item of service.products$ | async">
-      <shopping-cart-item-summary-component [item]="item" />
+    <div *ngIf="service.products$ | async as products">
+      <div *ngIf="products.length > 0; else noItemsInCart">
+        <div *ngFor="let item of products">
+          list of items:
+          <shopping-cart-item-summary-component [item]="item" />
+        </div>
+        <p-button label="Purchase" (click)="onClickPurchase()" />
+      </div>
+      <ng-template #noItemsInCart> No Items In Cart </ng-template>
     </div>
   `,
 })
 export class ShoppingCartComponent {
   constructor(public service: ShoppingCartFacadeService) {}
+
+  onClickPurchase() {
+    this.service.buyAllItemsInCart();
+  }
 }
